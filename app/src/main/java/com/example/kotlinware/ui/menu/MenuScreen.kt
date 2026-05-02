@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -18,8 +19,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.kotlinware.R
 import com.example.kotlinware.ui.theme.KotlinWareTheme
 
 @Composable
@@ -47,30 +50,36 @@ fun TopMenuBar (
 }
 @Composable
 fun BottomMenuBar (
+    onTitleButtonClick: () -> Unit,
+    onGamesButtonClick: () -> Unit,
+    onShopButtonClick: () -> Unit,
     padding: Int = 0,
 ) {
     Row(
-        modifier = Modifier.fillMaxWidth().size(50.dp).background(Color.Cyan),
+        modifier = Modifier.fillMaxWidth().size(100.dp).background(Color.Cyan),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceEvenly
     ) {
         Button(
-            onClick = {},
-            shape = RectangleShape
+            onClick = onTitleButtonClick,
+            shape = RectangleShape,
+            modifier = Modifier.fillMaxHeight().fillMaxWidth(0.33f)
         ) {
-            Text("Title")
+            Text(stringResource(R.string.title))
         }
         Button(
-            onClick = {},
-            shape = RectangleShape
+            onClick = onGamesButtonClick,
+            shape = RectangleShape,
+            modifier = Modifier.fillMaxHeight().fillMaxWidth(0.5f)
             ) {
-            Text("Game")
+            Text(stringResource(R.string.games))
         }
         Button(
-            onClick = {},
-            shape = RectangleShape
+            onClick = onShopButtonClick,
+            shape = RectangleShape,
+            modifier = Modifier.fillMaxHeight().fillMaxWidth()
             ) {
-            Text("Shop")
+            Text(stringResource(R.string.shop))
         }
     }
 }
@@ -79,7 +88,7 @@ enum class MenuDestination(
     val title:String
 ){
     TITLE("Title"),
-    GAME("Game"),
+    GAMES("Games"),
     SHOP("Shop")
 }
 
@@ -89,7 +98,7 @@ fun MenuPreview(){
     KotlinWareTheme() {
         Scaffold(
             topBar = {TopMenuBar()},
-            bottomBar = {BottomMenuBar()}
+            bottomBar = {BottomMenuBar({},{},{})}
 
         ){ innerPadding ->
             Column(
