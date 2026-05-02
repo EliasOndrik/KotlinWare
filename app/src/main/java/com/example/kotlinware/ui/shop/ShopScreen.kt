@@ -1,9 +1,11 @@
 package com.example.kotlinware.ui.shop
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -12,19 +14,23 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.kotlinware.R
 
 @Composable
-fun ShopScreen(){
+fun ShopScreen(
+    viewModel: ShopViewModel = viewModel()
+){
     Column(
         modifier = Modifier.background(Color.White).padding(20.dp),
     ) {
-
         Shelf()
         Shelf()
         Shelf()
-
     }
 }
 
@@ -54,9 +60,13 @@ fun PurchasableGame(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             if(!isPurchased){
-                Box(){
-
-                    Text("Image")
+                Box(
+                    modifier = Modifier.fillMaxHeight(0.8f)
+                ){
+                    Image(
+                        painter = painterResource(R.drawable.kotlingame),
+                        contentDescription = ""
+                    )
                 }
             }
             Box(
