@@ -27,7 +27,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             KotlinWareTheme {
                 val windowInsetsController = WindowCompat.getInsetsController(window, window.decorView)
-                windowInsetsController.hide(WindowInsetsCompat.Type.statusBars())
+                windowInsetsController.hide(WindowInsetsCompat.Type.systemBars())
 
                 // Nastaví, aby sa objavil len pri potiahnutí prstom
                 windowInsetsController.systemBarsBehavior =
