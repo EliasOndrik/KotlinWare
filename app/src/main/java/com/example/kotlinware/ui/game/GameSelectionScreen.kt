@@ -3,6 +3,7 @@ package com.example.kotlinware.ui.game
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -19,50 +20,63 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.LineHeightStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.kotlinware.R
+import com.example.kotlinware.data.Minigame
+import com.example.kotlinware.ui.AppViewModelProvider
+import com.example.kotlinware.ui.navigation.NavigationViewModel
+import kotlinx.coroutines.launch
 
 @Composable
-fun GameSelectionScreen(){
+fun GameSelectionScreen(
+    viewModel: GameSelectionViewModel = viewModel(factory = AppViewModelProvider.Factory),
+    onPlayClick: (String) -> Unit
+){
+    val minigames by viewModel.playableGameState.collectAsStateWithLifecycle()
+
+    GamePager(
+        minigames,
+        onPlayClick
+    )
+}
+
+@Composable
+fun GamePager(
+    minigames: List<Minigame>,
+    onPlayClick:(String)-> Unit = {}
+){
     Column(
         modifier = Modifier.background(Color.White)
-    ) {
+    ){
         val pagerState = rememberPagerState(pageCount = {
-            6
-        })
+            minigames.count()
+        }
+        )
+        val coroutineScope = rememberCoroutineScope()
         HorizontalPager(
             state = pagerState,
             modifier = Modifier.fillMaxWidth(),
         ) { page ->
-            Column(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Box(
-                    modifier = Modifier.background(Color.Cyan).padding(10.dp)
-                ){
-                    Text("Name")
-                }
-                Box(
-
-                ){
-                    Image(
-                        painter = painterResource(R.drawable.kotlingame),
-                        contentDescription = "",
-                        modifier = Modifier.fillMaxSize(0.7f).border(2.dp,Color.Cyan)
-                    )
-                }
-            }
-            
+            GamePage(
+                name = minigames[page].name,
+                score = minigames[page].score
+            )
         }
         Row(
             Modifier
@@ -80,6 +94,11 @@ fun GameSelectionScreen(){
                         .clip(CircleShape)
                         .background(color)
                         .size(16.dp)
+                        .clickable{
+                            coroutineScope.launch {
+                                pagerState.animateScrollToPage(page = iteration)
+                            }
+                        }
                 )
             }
         }
@@ -88,18 +107,63 @@ fun GameSelectionScreen(){
             contentAlignment = Alignment.Center
         ){
             Button(
-                onClick = {},
+                onClick = {onPlayClick(minigames[pagerState.currentPage].name)},
                 shape = RectangleShape
             ) {
                 Text("Play")
             }
         }
+    }
 
+}
+
+@Composable
+fun GamePage(
+    name:String = "",
+    score:Int = 0
+){
+    val context = LocalContext.current
+    val stringId = remember(name) {
+        context.resources.getIdentifier(
+            name,
+            "string",
+            context.packageName
+        )
+    }
+    Column(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Box(
+            modifier = Modifier.background(Color.Cyan).padding(10.dp)
+        ){
+
+            Text(stringResource(stringId))
+        }
+        Box(
+
+        ){
+            Image(
+                painter = painterResource(R.drawable.kotlingame),
+                contentDescription = "",
+                modifier = Modifier.fillMaxSize(0.7f).border(2.dp,Color.Cyan)
+            )
+        }
+        Box(
+            modifier = Modifier.background(Color.Cyan).padding(10.dp)
+        ){
+            Text("Score: $score")
+        }
     }
 }
 
 @Preview
 @Composable
 fun GameSelectionPreview(){
-    GameSelectionScreen()
+    GamePager(
+        listOf(Minigame(0,"tapping",0,false),
+            Minigame(0,"tapping",0,true),
+            Minigame(0,"tapping",0,false),
+            Minigame(0,"tapping",0,false))
+    )
 }

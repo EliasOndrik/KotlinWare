@@ -5,6 +5,8 @@ import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory
 import androidx.lifecycle.viewmodel.CreationExtras
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
+import com.example.kotlinware.ui.game.GameSelectionViewModel
+import com.example.kotlinware.ui.navigation.NavigationViewModel
 import com.example.kotlinware.ui.shop.ShopViewModel
 
 /**
@@ -14,6 +16,12 @@ object AppViewModelProvider {
     val Factory = viewModelFactory {
         initializer {
             ShopViewModel(kotlinWareApplication().container.gameRepository)
+        }
+        initializer {
+            NavigationViewModel(kotlinWareApplication().container.gameRepository)
+        }
+        initializer {
+            GameSelectionViewModel(kotlinWareApplication().container.gameRepository)
         }
 
     }
