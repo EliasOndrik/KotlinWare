@@ -3,4 +3,8 @@
     <string name="title">Title</string>
     <string name="games">Games</string>
     <string name="shop">Shop</string>
+    <string name="dragging">Dragging games</string>
+    <string name="rotating">Rotate phone</string>
+    <string name="swiping">Swiping games</string>
+    <string name="tapping">Tapping games</string>
 </resources>
