@@ -16,16 +16,16 @@ abstract class KotlinWareDatabase : RoomDatabase() {
         @Volatile
         private var Instance: KotlinWareDatabase? = null
         private val minigamesData = listOf(
-            "dragging",
-            "rotating",
-            "swiping",
-            "tapping",
+            Pair("tapping",1),
+            Pair("dragging",0),
+            Pair("rotating",0),
+            Pair("swiping",0),
         )
         val callback = object : Callback(){
             override fun onCreate(db: SupportSQLiteDatabase) {
                 super.onCreate(db)
                 minigamesData.forEach { name ->
-                    db.execSQL("INSERT INTO minigames (name,score,unlocked) VALUES ('$name', 0, 0)")
+                    db.execSQL("INSERT INTO minigames (name,score,unlocked) VALUES ('${name.first}', 0, ${name.second})")
                 }
                 db.execSQL("INSERT INTO players (money) VALUES (0)")
             }
