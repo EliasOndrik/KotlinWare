@@ -1,5 +1,6 @@
 package com.example.kotlinware.ui.menu
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -12,8 +13,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -30,23 +34,28 @@ fun TopMenuBar (
     coins:Int = 0,
     padding:Int = 0
 ) {
-    Row(
-        modifier = Modifier.fillMaxWidth().size(50.dp).background(Color.Cyan),
-        verticalAlignment = Alignment.CenterVertically,
+    Surface(
+        color = MaterialTheme.colorScheme.primary
     ) {
-        Row (
-            modifier = Modifier
-                .padding(10.dp)
-                .border(2.dp, Color.Blue,shape = CircleShape)
-                .size(150.dp)
-                .padding(horizontal = 10.dp),
-            verticalAlignment = Alignment.CenterVertically
+        Row(
+            modifier = Modifier.fillMaxWidth().size(50.dp),
+            verticalAlignment = Alignment.CenterVertically,
         ) {
-            Text( text = "Coins: ")
-            Spacer(modifier = Modifier.weight(0.9f))
-            Text(text = coins.toString())
+            Row (
+                modifier = Modifier
+                    .padding(10.dp)
+                    .border(2.dp, MaterialTheme.colorScheme.tertiary,shape = CircleShape)
+                    .size(150.dp)
+                    .padding(horizontal = 10.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text( text = "Coins: ")
+                Spacer(modifier = Modifier.weight(0.9f))
+                Text(text = coins.toString())
+            }
         }
     }
+
 }
 @Composable
 fun BottomMenuBar (
@@ -56,28 +65,31 @@ fun BottomMenuBar (
     padding: Int = 0,
 ) {
     Row(
-        modifier = Modifier.fillMaxWidth().size(100.dp).background(Color.Cyan),
+        modifier = Modifier.fillMaxWidth().size(50.dp).background(MaterialTheme.colorScheme.secondary),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceEvenly
     ) {
         Button(
             onClick = onTitleButtonClick,
             shape = RectangleShape,
-            modifier = Modifier.fillMaxHeight().fillMaxWidth(0.33f)
+            modifier = Modifier.fillMaxHeight(0.9f).size(100.dp),
+            border = BorderStroke(2.dp, MaterialTheme.colorScheme.tertiary)
         ) {
             Text(stringResource(R.string.title))
         }
         Button(
             onClick = onGamesButtonClick,
             shape = RectangleShape,
-            modifier = Modifier.fillMaxHeight().fillMaxWidth(0.5f)
+            modifier = Modifier.fillMaxHeight(0.9f).size(100.dp),
+            border = BorderStroke(2.dp, MaterialTheme.colorScheme.tertiary)
             ) {
             Text(stringResource(R.string.games))
         }
         Button(
             onClick = onShopButtonClick,
             shape = RectangleShape,
-            modifier = Modifier.fillMaxHeight().fillMaxWidth()
+            modifier = Modifier.fillMaxHeight(0.9f).size(100.dp),
+            border = BorderStroke(2.dp, MaterialTheme.colorScheme.tertiary)
             ) {
             Text(stringResource(R.string.shop))
         }
@@ -85,11 +97,11 @@ fun BottomMenuBar (
 }
 
 enum class MenuDestination(
-    val title:String
+    val id:Int
 ){
-    TITLE("Title"),
-    GAMES("Games"),
-    SHOP("Shop")
+    TITLE(R.string.title),
+    GAMES(R.string.games),
+    SHOP(R.string.shop)
 }
 
 @Preview
