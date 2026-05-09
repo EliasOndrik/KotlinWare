@@ -26,14 +26,14 @@ fun TitleScreen(){
     // Zistíme, či je mobil otočený horizontálne (Landscape)
     val isLandscape = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
     Box(
-        modifier = Modifier.fillMaxSize().background(Color.White),
+        modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ){
         Box(
-            modifier = Modifier.fillMaxWidth(0.8f).size(200.dp).background(Color.Cyan)
+            modifier = Modifier.fillMaxWidth(0.8f).size(200.dp)
         ){
             Image(
-                painter = painterResource(R.drawable.kotlintitle),
+                painter = painterResource(R.drawable.kotlinwarelogo3),
                 contentDescription = "",
                 modifier = Modifier.fillMaxSize()
             )
