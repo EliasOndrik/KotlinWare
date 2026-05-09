@@ -18,6 +18,8 @@ import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -29,18 +31,21 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.LineHeightStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.kotlinware.R
 import com.example.kotlinware.data.Minigame
 import com.example.kotlinware.ui.AppViewModelProvider
 import com.example.kotlinware.ui.navigation.NavigationViewModel
+import com.example.kotlinware.ui.theme.KotlinWareTheme
 import kotlinx.coroutines.launch
 
 @Composable
@@ -61,13 +66,15 @@ fun GamePager(
     minigames: List<Minigame>,
     onPlayClick:(String)-> Unit = {}
 ){
+    val pagerState = rememberPagerState(pageCount = {
+        minigames.count()
+    }
+    )
     Column(
-        modifier = Modifier.background(Color.White)
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Center
     ){
-        val pagerState = rememberPagerState(pageCount = {
-            minigames.count()
-        }
-        )
+
         val coroutineScope = rememberCoroutineScope()
         HorizontalPager(
             state = pagerState,
@@ -82,7 +89,7 @@ fun GamePager(
             Modifier
                 .wrapContentHeight()
                 .fillMaxWidth()
-                .padding(bottom = 8.dp),
+                .padding(vertical = 8.dp),
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.Bottom
         ) {
@@ -102,16 +109,17 @@ fun GamePager(
                 )
             }
         }
-        Box(
-            modifier = Modifier.fillMaxWidth(),
-            contentAlignment = Alignment.Center
-        ){
-            Button(
-                onClick = {onPlayClick(minigames[pagerState.currentPage].name)},
-                shape = RectangleShape
-            ) {
-                Text("Play")
-            }
+
+    }
+    Box(
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ){
+        Button(
+            onClick = {onPlayClick(minigames[pagerState.currentPage].name)},
+            shape = RectangleShape
+        ) {
+            Text("Play")
         }
     }
 
@@ -130,40 +138,60 @@ fun GamePage(
             context.packageName
         )
     }
+    val imageId = remember(name) {
+        context.resources.getIdentifier(
+            name,
+            "drawable",
+            context.packageName
+        )
+    }
+
     Column(
         modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Box(
-            modifier = Modifier.background(Color.Cyan).padding(10.dp)
-        ){
+        Surface(
+            color = MaterialTheme.colorScheme.secondary
+        ) {
+            Box(
+                modifier = Modifier.padding(10.dp)
+            ){
 
-            Text(stringResource(stringId))
+                Text(stringResource(stringId))
+            }
         }
         Box(
 
         ){
             Image(
-                painter = painterResource(R.drawable.kotlingame),
+                painter = painterResource(imageId),
                 contentDescription = "",
-                modifier = Modifier.fillMaxSize(0.7f).border(2.dp,Color.Cyan)
+                modifier = Modifier.fillMaxSize(0.7f),
             )
         }
-        Box(
-            modifier = Modifier.background(Color.Cyan).padding(10.dp)
-        ){
-            Text("Score: $score")
+        Surface(
+            color = MaterialTheme.colorScheme.secondary
+        ) {
+            Box(
+                modifier = Modifier.padding(10.dp)
+            ){
+                Text("Score: $score",)
+            }
         }
+
     }
 }
 
 @Preview
 @Composable
 fun GameSelectionPreview(){
-    GamePager(
-        listOf(Minigame(0,"tapping",0,false),
-            Minigame(0,"tapping",0,true),
-            Minigame(0,"tapping",0,false),
-            Minigame(0,"tapping",0,false))
-    )
+    KotlinWareTheme{
+        GamePager(
+            listOf(Minigame(0,"tapping",0,false),
+                Minigame(0,"tapping",0,true),
+                Minigame(0,"tapping",0,false),
+                Minigame(0,"tapping",0,false))
+        )
+    }
+
 }
