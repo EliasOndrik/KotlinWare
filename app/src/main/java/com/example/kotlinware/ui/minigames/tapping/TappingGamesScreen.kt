@@ -50,6 +50,14 @@ fun TappingGamesScreen(
                 viewModel.penWasteViewModel
             )
         }
+
+        TappingGames.CORRECTORDER -> {
+            CorrectOrderScreen(
+                onGameSuccess = {viewModel.onGameSuccess()},
+                onGameFail = {viewModel.onGameFail()},
+                viewModel.correctOrderViewModel
+            )
+        }
     }
 }
 

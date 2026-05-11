@@ -20,6 +20,7 @@ class TappingGamesViewModel : ViewModel(){
     val ballonPopViewModel = BallonPopViewModel()
     val catTapViewModel = CatTapViewModel()
     val penWasteViewModel = PenWasteViewModel()
+    val correctOrderViewModel = CorrectOrderViewModel()
 
     private var success = false
 
@@ -39,6 +40,7 @@ class TappingGamesViewModel : ViewModel(){
                     TappingGames.BALLONPOP -> {ballonPopViewModel.resetMinigame()}
                     TappingGames.CATTAP -> {catTapViewModel.resetMinigame()}
                     TappingGames.PENWASTE -> {penWasteViewModel.resetMinigame()}
+                    TappingGames.CORRECTORDER -> {correctOrderViewModel.resetMinigame()}
                 }
 
             } else {
@@ -51,11 +53,12 @@ class TappingGamesViewModel : ViewModel(){
         _timerMillis.value = time
     }
     fun pickRandomMinigame(){
-        val randomIndex = 2//Random.nextInt(3)
+        val randomIndex = Random.nextInt(5)
         when(randomIndex){
             0 ->{_currentMinigame.update { TappingGames.BALLONPOP } }
             1 -> {_currentMinigame.update { TappingGames.CATTAP }}
             2 -> {_currentMinigame.update { TappingGames.PENWASTE }}
+            3 -> {_currentMinigame.update { TappingGames.CORRECTORDER }}
             else -> {}
         }
 
@@ -67,6 +70,7 @@ class TappingGamesViewModel : ViewModel(){
     }
     fun onGameFail(){
         success = false
+        resetTimer(_timerMillis.value.coerceAtMost(1000L))
     }
     fun onGameEnded(){
         if (success){
@@ -94,4 +98,5 @@ enum class TappingGames(
     BALLONPOP(5000L),
     CATTAP(5000L),
     PENWASTE(5000L),
+    CORRECTORDER(5000L),
 }
