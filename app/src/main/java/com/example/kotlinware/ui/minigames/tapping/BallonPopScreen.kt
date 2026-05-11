@@ -7,6 +7,8 @@ import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -23,15 +25,20 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 @Composable
 fun BallonPopScreen(
     onGameSuccess: ()-> Unit ,
-    viewModel: BallonPopViewModel = viewModel()
+    viewModel: BallonPopViewModel
 ){
     val ballons by viewModel.ballons.collectAsState()
-    Box(
-        modifier = Modifier.fillMaxWidth(),
-        contentAlignment = Alignment.Center
-    ){
-        Text("Pop", fontSize = 40.sp)
+    Surface(
+        color = MaterialTheme.colorScheme.background
+    ) {
+        Box(
+            modifier = Modifier.fillMaxWidth(),
+            contentAlignment = Alignment.Center
+        ){
+            Text("Pop", fontSize = 40.sp)
+        }
     }
+
     Canvas(
         modifier = Modifier.fillMaxSize().pointerInput(Unit){
             detectTapGestures { offset ->
@@ -70,5 +77,5 @@ fun BallonPopScreen(
 @Preview
 @Composable
 fun BallonPopPreview(){
-    BallonPopScreen({})
+    BallonPopScreen({}, BallonPopViewModel())
 }

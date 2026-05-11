@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.count
 import kotlinx.coroutines.flow.update
 import kotlin.random.Random
 
-class BallonPopViewModel: ViewModel() {
+class BallonPopViewModel{
 
     private val _ballons = MutableStateFlow(listOf(
         Ballon(0f, 120f, BallonColor.BLUE.color,false),
@@ -25,11 +25,10 @@ class BallonPopViewModel: ViewModel() {
         _ballons.update { currentList ->
             var wasPopped = false
             currentList.map { ballon ->
-
                 val distance = (offset - Offset(ballon.x,ballon.y)).getDistance()
                 if (wasPopped){
                     ballon
-                } else if (distance <= 200f){
+                } else if (!ballon.popped && distance <= 200f){
                     wasPopped = true
                     ballon.copy(popped = true)
                 } else{
@@ -44,6 +43,13 @@ class BallonPopViewModel: ViewModel() {
             arePopped = arePopped && _ballons.value[i].popped
         }
         return arePopped
+    }
+    fun resetMinigame(){
+        _ballons.update { currentList ->
+            currentList.map { ballon ->
+                ballon.copy(popped = false)
+            }
+        }
     }
 }
 data class Ballon(
