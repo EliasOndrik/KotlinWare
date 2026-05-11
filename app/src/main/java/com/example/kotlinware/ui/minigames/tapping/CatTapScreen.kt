@@ -30,16 +30,7 @@ fun CatTapScreen(
     viewModel: CatTapViewModel
 ){
     val cats by viewModel.cats.collectAsStateWithLifecycle()
-    Surface(
-        color = MaterialTheme.colorScheme.background
-    ) {
-        Box(
-            modifier = Modifier.fillMaxWidth(),
-            contentAlignment = Alignment.Center
-        ){
-            Text("Whack the cat", fontSize = 40.sp)
-        }
-    }
+
     Canvas(
         modifier = Modifier.fillMaxSize().pointerInput(Unit){
             detectTapGestures { offset ->
@@ -60,6 +51,16 @@ fun CatTapScreen(
                 size = Size(viewModel.width,viewModel.height),
                 topLeft = Offset(screenWidth/2f + cat.x,screenHeight/2f + cat.y)
             )
+        }
+    }
+    Surface(
+        color = MaterialTheme.colorScheme.background
+    ) {
+        Box(
+            modifier = Modifier.fillMaxWidth(),
+            contentAlignment = Alignment.Center
+        ){
+            Text("Whack the cat", fontSize = 40.sp)
         }
     }
 }
