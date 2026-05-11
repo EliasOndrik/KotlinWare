@@ -42,6 +42,14 @@ fun TappingGamesScreen(
                 viewModel.catTapViewModel
             )
         }
+
+        TappingGames.PENWASTE -> {
+            PenWasteScreen(
+                deltaTime = deltaTime,
+                onGameSuccess = {viewModel.onGameSuccess()},
+                viewModel.penWasteViewModel
+            )
+        }
     }
 }
 
