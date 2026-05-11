@@ -1,9 +1,12 @@
 package com.example.kotlinware.ui.minigames.tapping
 
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
+import kotlin.random.Random
 
 class TappingGamesViewModel : ViewModel(){
     private val _gameProgress = MutableStateFlow(GameProgress())
@@ -14,16 +17,28 @@ class TappingGamesViewModel : ViewModel(){
     val previousTimeMillis = _previousTimeMillis.asStateFlow()
     private val _timerMillis = MutableStateFlow(TappingGames.TRANSITION.time)
     val timerMillis = _timerMillis.asStateFlow()
+    val ballonPopViewModel = BallonPopViewModel()
+    val catTapViewModel = CatTapViewModel()
 
     private var success = false
 
     fun updateTimeMillis(time: Long){
+        if (_previousTimeMillis.value <= 0L){
+            initializeTimer(time)
+        }
         _timerMillis.update { it - (time - _previousTimeMillis.value) }
 
         _previousTimeMillis.update { time }
         if (_timerMillis.value<= 0L){
             if (_currentMinigame.value == TappingGames.TRANSITION){
                 pickRandomMinigame()
+
+                when(_currentMinigame.value){
+                    TappingGames.TRANSITION -> {}
+                    TappingGames.BALLONPOP -> {ballonPopViewModel.resetMinigame()}
+                    TappingGames.CATTAP -> {catTapViewModel.resetMinigame()}
+                }
+
             } else {
                 onGameEnded()
             }
@@ -34,7 +49,13 @@ class TappingGamesViewModel : ViewModel(){
         _timerMillis.value = time
     }
     fun pickRandomMinigame(){
-        _currentMinigame.update { TappingGames.BALLONPOP }
+        val randomIndex = Random.nextInt(2)
+        when(randomIndex){
+            0 ->{_currentMinigame.update { TappingGames.BALLONPOP } }
+            1 -> {_currentMinigame.update { TappingGames.CATTAP }}
+            else -> {}
+        }
+
     }
 
     fun onGameSuccess(){
@@ -53,6 +74,9 @@ class TappingGamesViewModel : ViewModel(){
         _currentMinigame.value = TappingGames.TRANSITION
         success = false
     }
+    private fun initializeTimer(time: Long){
+        _previousTimeMillis.update { time }
+    }
 }
 
 data class GameProgress(
@@ -65,4 +89,5 @@ enum class TappingGames(
 ){
     TRANSITION(2000L),
     BALLONPOP(5000L),
+    CATTAP(5000L),
 }
