@@ -15,7 +15,7 @@ class PenWasteViewModel {
     val penEnd = _penEnd.asStateFlow()
     val buttonOffset: Offset = Offset(200f,-200f)
     val buttonRadius: Float = 40f
-    var numberOfClicks: Int = 0
+    private var numberOfClicks: Int = 0
     val clickLimit: Int = 20
     val fallSpeed: Float = 20f
     val ground: Float = 400f
