@@ -82,7 +82,7 @@ fun KotlinWareNavHost(
                     composable(
                         route = "tap"
                     ){
-                        TappingGamesScreen()
+                        TappingGamesScreen( onQuit = {navHostController.navigate(MenuDestination.GAMES.name)})
                     }
                 }
             }
