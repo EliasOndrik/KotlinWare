@@ -6,6 +6,8 @@ import androidx.lifecycle.viewmodel.CreationExtras
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.kotlinware.ui.game.GameSelectionViewModel
+import com.example.kotlinware.ui.minigames.AbstractManagerViewModel
+import com.example.kotlinware.ui.minigames.tapping.TappingGamesViewModel
 import com.example.kotlinware.ui.navigation.NavigationViewModel
 import com.example.kotlinware.ui.shop.ShopViewModel
 
@@ -22,6 +24,9 @@ object AppViewModelProvider {
         }
         initializer {
             GameSelectionViewModel(kotlinWareApplication().container.gameRepository)
+        }
+        initializer {
+            TappingGamesViewModel(kotlinWareApplication().container.gameRepository)
         }
 
     }
