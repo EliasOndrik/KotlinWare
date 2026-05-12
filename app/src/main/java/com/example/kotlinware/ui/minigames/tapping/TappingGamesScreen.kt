@@ -11,6 +11,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.kotlinware.ui.AppViewModelProvider
 import com.example.kotlinware.ui.minigames.GameOverScreen
 import com.example.kotlinware.ui.minigames.IntermissionScreen
+import com.example.kotlinware.ui.minigames.MinigameType
 import kotlinx.coroutines.flow.MutableStateFlow
 
 @Composable
@@ -29,11 +30,10 @@ fun TappingGamesScreen(
         }
     }
     when (currentMinigame){
-        TappingGames.TRANSITION -> {
+        MinigameType.TRANSITION -> {
             if (gameProgress.lives> 0){
                 IntermissionScreen(gameProgress.lives,gameProgress.score)
             }else{
-                viewModel.saveProgress()
                 GameOverScreen(
                     onQuit = onQuit,
                     onRetry = {viewModel.onGameRetry()},
@@ -42,13 +42,13 @@ fun TappingGamesScreen(
             }
 
         }
-        TappingGames.BALLONPOP -> {
+        MinigameType.BALLONPOP -> {
             BallonPopScreen(
                 onGameSuccess = {viewModel.onGameSuccess()},
                 viewModel.ballonPopViewModel
             )
         }
-        TappingGames.CATTAP -> {
+        MinigameType.CATTAP -> {
             CatTapScreen(
                 deltaTime = deltaTime,
                 onGameSuccess = {viewModel.onGameSuccess()},
@@ -56,7 +56,7 @@ fun TappingGamesScreen(
             )
         }
 
-        TappingGames.PENWASTE -> {
+        MinigameType.PENWASTE -> {
             PenWasteScreen(
                 deltaTime = deltaTime,
                 onGameSuccess = {viewModel.onGameSuccess()},
@@ -64,7 +64,7 @@ fun TappingGamesScreen(
             )
         }
 
-        TappingGames.CORRECTORDER -> {
+        MinigameType.CORRECTORDER -> {
             CorrectOrderScreen(
                 onGameSuccess = {viewModel.onGameSuccess()},
                 onGameFail = {viewModel.onGameFail()},
