@@ -8,12 +8,15 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.withFrameMillis
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.kotlinware.ui.AppViewModelProvider
+import com.example.kotlinware.ui.minigames.GameOverScreen
 import com.example.kotlinware.ui.minigames.IntermissionScreen
 import kotlinx.coroutines.flow.MutableStateFlow
 
 @Composable
 fun TappingGamesScreen(
-    viewModel: TappingGamesViewModel = viewModel()
+    onQuit:()-> Unit,
+    viewModel: TappingGamesViewModel = viewModel(factory = AppViewModelProvider.Factory)
 ){
     val currentMinigame by viewModel.currentMinigame.collectAsStateWithLifecycle()
     val gameProgress by viewModel.gameProgress.collectAsStateWithLifecycle()
@@ -27,7 +30,17 @@ fun TappingGamesScreen(
     }
     when (currentMinigame){
         TappingGames.TRANSITION -> {
-            IntermissionScreen(gameProgress.lives,gameProgress.score)
+            if (gameProgress.lives> 0){
+                IntermissionScreen(gameProgress.lives,gameProgress.score)
+            }else{
+                viewModel.saveProgress()
+                GameOverScreen(
+                    onQuit = onQuit,
+                    onRetry = {viewModel.onGameRetry()},
+                    score = gameProgress.score
+                )
+            }
+
         }
         TappingGames.BALLONPOP -> {
             BallonPopScreen(

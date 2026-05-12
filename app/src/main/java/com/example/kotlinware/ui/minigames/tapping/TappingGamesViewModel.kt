@@ -1,14 +1,26 @@
 package com.example.kotlinware.ui.minigames.tapping
 
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.kotlinware.data.GameInterfaceRepository
+import com.example.kotlinware.data.Minigame
+import com.example.kotlinware.data.Player
+import com.example.kotlinware.ui.minigames.GameProgress
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 import kotlin.random.Random
 
-class TappingGamesViewModel : ViewModel(){
+class TappingGamesViewModel(
+    private val gameRepository: GameInterfaceRepository
+) : ViewModel(){
+
     private val _gameProgress = MutableStateFlow(GameProgress())
     val gameProgress = _gameProgress.asStateFlow()
     private val _currentMinigame = MutableStateFlow(TappingGames.TRANSITION)
@@ -25,6 +37,9 @@ class TappingGamesViewModel : ViewModel(){
     private var success = false
 
     fun updateTimeMillis(time: Long){
+        if (_gameProgress.value.lives<=0){
+            return
+        }
         if (_previousTimeMillis.value <= 0L){
             initializeTimer(time)
         }
@@ -61,7 +76,6 @@ class TappingGamesViewModel : ViewModel(){
             3 -> {_currentMinigame.update { TappingGames.CORRECTORDER }}
             else -> {}
         }
-
     }
 
     fun onGameSuccess(){
@@ -71,6 +85,14 @@ class TappingGamesViewModel : ViewModel(){
     fun onGameFail(){
         success = false
         resetTimer(_timerMillis.value.coerceAtMost(1000L))
+    }
+    fun onGameRetry(){
+
+        initializeTimer(0L)
+        _gameProgress.update { GameProgress() }
+        _currentMinigame.value = TappingGames.TRANSITION
+        success = false
+
     }
     fun onGameEnded(){
         if (success){
@@ -83,6 +105,21 @@ class TappingGamesViewModel : ViewModel(){
     }
     private fun initializeTimer(time: Long){
         _previousTimeMillis.update { time }
+    }
+    fun saveProgress(){
+        if(_gameProgress.value.lives>0){
+            return
+        }
+        viewModelScope.launch {
+            val currentMinigame = gameRepository.getMinigameByName("tapping").first()
+            if (_gameProgress.value.score > currentMinigame.score){
+                val updateMinigame = currentMinigame.copy(score = _gameProgress.value.score)
+                gameRepository.updateMinigame(updateMinigame)
+            }
+            val currentPlayer = gameRepository.getPlayer().first()
+            val updatePlayer = currentPlayer.copy(money = currentPlayer.money + _gameProgress.value.score)
+            gameRepository.updatePlayer(updatePlayer)
+        }
     }
 }
 
