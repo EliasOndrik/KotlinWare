@@ -16,6 +16,8 @@ interface MinigameDao {
     @Delete
     suspend fun delete(obj: Minigame): Int?
 
+    @Query("SELECT * from minigames WHERE name = :name")
+    fun getMinigameByName(name:String): Flow<Minigame>
     @Query("SELECT * from minigames WHERE id = :id")
     fun getMinigame(id: Int): Flow<Minigame>
 

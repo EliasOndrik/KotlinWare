@@ -12,6 +12,8 @@ class GameRepository(
 
     override suspend fun deleteMinigame(minigame: Minigame){minigameDao.delete(minigame)}
 
+    override fun getMinigameByName(name: String): Flow<Minigame> =minigameDao.getMinigameByName(name)
+
     override fun getAllMinigames(): Flow<List<Minigame>> = minigameDao.getAllMinigames()
 
     override fun getAllPlayableMinigames(): Flow<List<Minigame>> = minigameDao.getAllPlayableMinigames()

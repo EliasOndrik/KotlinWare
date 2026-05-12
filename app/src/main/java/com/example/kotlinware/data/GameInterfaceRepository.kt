@@ -6,6 +6,7 @@ interface GameInterfaceRepository {
     suspend fun insertMinigame(minigame: Minigame)
     suspend fun updateMinigame(minigame: Minigame)
     suspend fun deleteMinigame(minigame: Minigame)
+    fun getMinigameByName(name: String) : Flow<Minigame>
     fun getAllMinigames() : Flow<List<Minigame>>
     fun getAllPlayableMinigames() : Flow<List<Minigame>>
 
