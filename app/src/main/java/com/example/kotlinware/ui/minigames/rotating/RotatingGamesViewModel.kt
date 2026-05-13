@@ -23,6 +23,7 @@ class RotatingGamesViewModel(
     val gameRepository: GameInterfaceRepository
 ) : AndroidViewModel(application) {
     val waveGoodbyeViewModel = WaveGoodbyeViewModel()
+    val footballSkillViewModel = FootballSkillViewModel()
     private val sensorManager = application.getSystemService(Context.SENSOR_SERVICE) as SensorManager
     private val rotationSensor = sensorManager.getDefaultSensor(Sensor.TYPE_GAME_ROTATION_VECTOR)
 
@@ -100,10 +101,10 @@ class RotatingGamesViewModel(
         _timerMillis.value = time
     }
     fun pickRandomMinigame() {
-        val randomIndex = 0//Random.nextInt(5)
+        val randomIndex =1//Random.nextInt(5)
         when(randomIndex){
             0 -> {switchMinigameType(MinigameType.WAVEGOODBYE )}
-            //1 -> {switchMinigameType(MinigameType.CATTAP)}
+            1 -> {switchMinigameType(MinigameType.FOOTBALLSKILL)}
             //2 -> {switchMinigameType(MinigameType.PENWASTE)}
             //3 -> {switchMinigameType(MinigameType.CORRECTORDER)}
             else -> {}
@@ -156,6 +157,7 @@ class RotatingGamesViewModel(
     fun resetMinigame(){
         when(currentMinigame.value){
             MinigameType.WAVEGOODBYE -> {waveGoodbyeViewModel.resetMinigame()}
+            MinigameType.FOOTBALLSKILL->{footballSkillViewModel.resetMinigame()}
             else -> {}
         }
     }

@@ -63,6 +63,16 @@ fun RotatingGamesScreen(
             )
         }
 
+        MinigameType.FOOTBALLSKILL ->{
+            FootballSkillScreen(
+                onSuccess = {viewModel.onGameSuccess()},
+                onFail = {viewModel.onGameFail()},
+                rotations,
+                deltaTime,
+                viewModel.footballSkillViewModel
+            )
+        }
+
         else -> {}
     }
 
