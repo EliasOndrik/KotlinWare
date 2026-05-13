@@ -114,4 +114,5 @@ enum class MinigameType(
     PENWASTE(5000L),
     CORRECTORDER(5000L),
     WAVEGOODBYE(5000L),
+    FOOTBALLSKILL(5000L),
 }
