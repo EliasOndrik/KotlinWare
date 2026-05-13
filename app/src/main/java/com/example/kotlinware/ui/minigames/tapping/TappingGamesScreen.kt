@@ -71,6 +71,8 @@ fun TappingGamesScreen(
                 viewModel.correctOrderViewModel
             )
         }
+
+        else -> {}
     }
 }
 
