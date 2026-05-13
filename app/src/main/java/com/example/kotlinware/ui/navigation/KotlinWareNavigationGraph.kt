@@ -20,6 +20,8 @@ import com.example.kotlinware.ui.menu.BottomMenuBar
 import com.example.kotlinware.ui.menu.MenuDestination
 import com.example.kotlinware.ui.menu.TopMenuBar
 import com.example.kotlinware.ui.minigames.IntermissionScreen
+import com.example.kotlinware.ui.minigames.rotating.RotatingGamesScreen
+import com.example.kotlinware.ui.minigames.rotating.RotatingGamesViewModel
 import com.example.kotlinware.ui.minigames.tapping.BallonPopScreen
 import com.example.kotlinware.ui.minigames.tapping.TappingGamesScreen
 import com.example.kotlinware.ui.shop.ShopScreen
@@ -80,9 +82,14 @@ fun KotlinWareNavHost(
                     route = AppDestination.GAME.name
                 ){
                     composable(
-                        route = "tap"
+                        route = "tapping"
                     ){
                         TappingGamesScreen( onQuit = {navHostController.navigate(MenuDestination.GAMES.name)})
+                    }
+                    composable(
+                        route = "tap"
+                    ){
+                        RotatingGamesScreen(onQuit = {navHostController.navigate(MenuDestination.GAMES.name)})
                     }
                 }
             }
