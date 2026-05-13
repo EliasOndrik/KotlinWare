@@ -72,6 +72,13 @@ fun RotatingGamesScreen(
                 viewModel.footballSkillViewModel
             )
         }
+        MinigameType.TUNEFINDER -> {
+            TuneFinderScreen(
+                onSuccess = {viewModel.onGameSuccess()},
+                rotations,
+                viewModel.tuneFinderViewModel
+            )
+        }
 
         else -> {}
     }

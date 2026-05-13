@@ -24,6 +24,7 @@ class RotatingGamesViewModel(
 ) : AndroidViewModel(application) {
     val waveGoodbyeViewModel = WaveGoodbyeViewModel()
     val footballSkillViewModel = FootballSkillViewModel()
+    val tuneFinderViewModel = TuneFinderViewModel()
     private val sensorManager = application.getSystemService(Context.SENSOR_SERVICE) as SensorManager
     private val rotationSensor = sensorManager.getDefaultSensor(Sensor.TYPE_GAME_ROTATION_VECTOR)
 
@@ -57,7 +58,7 @@ class RotatingGamesViewModel(
         super.onCleared()
         stopListening()
     }
-// Nedokáže dediť od viewModel a abstractManager naraz.
+// Nedokáže dediť od androidViewModel a abstractManager naraz.
     val minigameName: String = "rotating"
     private val _gameProgress = MutableStateFlow(GameProgress())
     val gameProgress = _gameProgress.asStateFlow()
@@ -101,11 +102,11 @@ class RotatingGamesViewModel(
         _timerMillis.value = time
     }
     fun pickRandomMinigame() {
-        val randomIndex =1//Random.nextInt(5)
+        val randomIndex = 2//Random.nextInt(5)
         when(randomIndex){
             0 -> {switchMinigameType(MinigameType.WAVEGOODBYE )}
             1 -> {switchMinigameType(MinigameType.FOOTBALLSKILL)}
-            //2 -> {switchMinigameType(MinigameType.PENWASTE)}
+            2 -> {switchMinigameType(MinigameType.TUNEFINDER)}
             //3 -> {switchMinigameType(MinigameType.CORRECTORDER)}
             else -> {}
         }
@@ -158,6 +159,7 @@ class RotatingGamesViewModel(
         when(currentMinigame.value){
             MinigameType.WAVEGOODBYE -> {waveGoodbyeViewModel.resetMinigame()}
             MinigameType.FOOTBALLSKILL->{footballSkillViewModel.resetMinigame()}
+            MinigameType.TUNEFINDER->{tuneFinderViewModel.resetMinigame()}
             else -> {}
         }
     }
