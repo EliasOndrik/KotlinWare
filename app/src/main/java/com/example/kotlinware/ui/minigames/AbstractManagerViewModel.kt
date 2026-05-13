@@ -113,4 +113,5 @@ enum class MinigameType(
     CATTAP(5000L),
     PENWASTE(5000L),
     CORRECTORDER(5000L),
+    WAVEGOODBYE(5000L),
 }
