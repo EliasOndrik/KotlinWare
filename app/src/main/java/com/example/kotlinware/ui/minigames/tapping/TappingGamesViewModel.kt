@@ -18,7 +18,7 @@ class TappingGamesViewModel(
 
 
     override fun pickRandomMinigame(){
-        val randomIndex = Random.nextInt(5)
+        val randomIndex = Random.nextInt(4)
         when(randomIndex){
             0 -> {switchMinigameType(MinigameType.BALLONPOP )}
             1 -> {switchMinigameType(MinigameType.CATTAP)}
