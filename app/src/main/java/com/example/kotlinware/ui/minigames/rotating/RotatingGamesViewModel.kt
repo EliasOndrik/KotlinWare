@@ -67,7 +67,7 @@ class RotatingGamesViewModel(
     val currentMinigame = _currentMinigame.asStateFlow()
     private val _previousTimeMillis = MutableStateFlow(0L)
     val previousTimeMillis = _previousTimeMillis.asStateFlow()
-    private val _timerMillis = MutableStateFlow(0L)
+    private val _timerMillis = MutableStateFlow(MinigameType.TRANSITION.time)
     val timerMillis = _timerMillis.asStateFlow()
     private var success = false
     private var saved = false
