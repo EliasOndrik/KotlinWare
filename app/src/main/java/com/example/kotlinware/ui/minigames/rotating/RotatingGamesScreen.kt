@@ -80,6 +80,16 @@ fun RotatingGamesScreen(
             )
         }
 
+        MinigameType.PLATYPUSPARRY -> {
+            PlatypusParryScreen(
+                onSuccess = {viewModel.onGameSuccess()},
+                onFail = {viewModel.onGameFail()},
+                rotations,
+                deltaTime,
+                viewModel.platypusParryViewModel
+            )
+        }
+
         else -> {}
     }
 

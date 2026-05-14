@@ -25,6 +25,7 @@ class RotatingGamesViewModel(
     val waveGoodbyeViewModel = WaveGoodbyeViewModel()
     val footballSkillViewModel = FootballSkillViewModel()
     val tuneFinderViewModel = TuneFinderViewModel()
+    val platypusParryViewModel = PlatypusParryViewModel()
     private val sensorManager = application.getSystemService(Context.SENSOR_SERVICE) as SensorManager
     private val rotationSensor = sensorManager.getDefaultSensor(Sensor.TYPE_GAME_ROTATION_VECTOR)
 
@@ -102,12 +103,12 @@ class RotatingGamesViewModel(
         _timerMillis.value = time
     }
     fun pickRandomMinigame() {
-        val randomIndex = 2//Random.nextInt(5)
+        val randomIndex = Random.nextInt(4)
         when(randomIndex){
             0 -> {switchMinigameType(MinigameType.WAVEGOODBYE )}
             1 -> {switchMinigameType(MinigameType.FOOTBALLSKILL)}
             2 -> {switchMinigameType(MinigameType.TUNEFINDER)}
-            //3 -> {switchMinigameType(MinigameType.CORRECTORDER)}
+            3 -> {switchMinigameType(MinigameType.PLATYPUSPARRY)}
             else -> {}
         }
     }
@@ -160,6 +161,7 @@ class RotatingGamesViewModel(
             MinigameType.WAVEGOODBYE -> {waveGoodbyeViewModel.resetMinigame()}
             MinigameType.FOOTBALLSKILL->{footballSkillViewModel.resetMinigame()}
             MinigameType.TUNEFINDER->{tuneFinderViewModel.resetMinigame()}
+            MinigameType.PLATYPUSPARRY->{platypusParryViewModel.resetMinigame()}
             else -> {}
         }
     }
