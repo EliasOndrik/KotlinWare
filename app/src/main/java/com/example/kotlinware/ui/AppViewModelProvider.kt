@@ -10,6 +10,7 @@ import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.kotlinware.ui.game.GameSelectionViewModel
 import com.example.kotlinware.ui.minigames.AbstractManagerViewModel
+import com.example.kotlinware.ui.minigames.draging.DraggingGamesViewModel
 import com.example.kotlinware.ui.minigames.rotating.RotatingGamesScreen
 import com.example.kotlinware.ui.minigames.rotating.RotatingGamesViewModel
 import com.example.kotlinware.ui.minigames.tapping.TappingGamesViewModel
@@ -38,7 +39,9 @@ object AppViewModelProvider {
             RotatingGamesViewModel(application,kotlinWareApplication().container.gameRepository)
 
         }
-
+        initializer {
+            DraggingGamesViewModel(kotlinWareApplication().container.gameRepository)
+        }
     }
 }
 
