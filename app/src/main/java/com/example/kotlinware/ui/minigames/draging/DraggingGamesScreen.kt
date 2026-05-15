@@ -60,6 +60,13 @@ fun DraggingGamesScreen(
                 viewModel.lightCandleViewModel
             )
         }
+        MinigameType.SUGARRUSH -> {
+            SugarRushScreen(
+                onSuccess = {viewModel.onGameSuccess()},
+                deltaTime,
+                viewModel.sugarRushViewModel
+            )
+        }
 
         else -> {}
     }

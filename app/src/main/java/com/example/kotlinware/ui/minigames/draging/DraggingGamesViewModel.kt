@@ -12,14 +12,15 @@ class DraggingGamesViewModel(gameRepository: GameInterfaceRepository) :
     val cashInViewModel = CashInViewModel()
     val dropInBucketViewModel = DropInBucketViewModel()
     val lightCandleViewModel = LightCandleViewModel()
+    val sugarRushViewModel = SugarRushViewModel()
 
     override fun pickRandomMinigame() {
-        val randomIndex = 2//Random.nextInt(4)
+        val randomIndex = Random.nextInt(4)
         when(randomIndex){
             0 -> {switchMinigameType(MinigameType.CASHIN )}
             1 -> {switchMinigameType(MinigameType.DROPINBUCKET)}
             2 -> {switchMinigameType(MinigameType.LIGHTCANDLE)}
-            //3 -> {switchMinigameType(MinigameType.CORRECTORDER)}
+            3 -> {switchMinigameType(MinigameType.SUGARRUSH)}
             else -> {}
         }
     }
@@ -29,7 +30,7 @@ class DraggingGamesViewModel(gameRepository: GameInterfaceRepository) :
             MinigameType.CASHIN -> {cashInViewModel.resetMinigame()}
             MinigameType.DROPINBUCKET -> {dropInBucketViewModel.resetMinigame()}
             MinigameType.LIGHTCANDLE -> {lightCandleViewModel.resetMinigame()}
-            //MinigameType.CORRECTORDER -> {correctOrderViewModel.resetMinigame()}
+            MinigameType.SUGARRUSH -> {sugarRushViewModel.resetMinigame()}
             else -> {}
         }
     }
