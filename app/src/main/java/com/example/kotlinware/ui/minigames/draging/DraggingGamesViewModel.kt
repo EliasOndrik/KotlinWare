@@ -10,12 +10,13 @@ class DraggingGamesViewModel(gameRepository: GameInterfaceRepository) :
 
     override val minigameName: String = "dragging"
     val cashInViewModel = CashInViewModel()
+    val dropInBucketViewModel = DropInBucketViewModel()
 
     override fun pickRandomMinigame() {
-        val randomIndex = 0//Random.nextInt(4)
+        val randomIndex = 1//Random.nextInt(4)
         when(randomIndex){
             0 -> {switchMinigameType(MinigameType.CASHIN )}
-            //1 -> {switchMinigameType(MinigameType.CATTAP)}
+            1 -> {switchMinigameType(MinigameType.DROPINBUCKET)}
             //2 -> {switchMinigameType(MinigameType.PENWASTE)}
             //3 -> {switchMinigameType(MinigameType.CORRECTORDER)}
             else -> {}
@@ -25,7 +26,7 @@ class DraggingGamesViewModel(gameRepository: GameInterfaceRepository) :
     override fun resetMinigame() {
         when(currentMinigame.value){
             MinigameType.CASHIN -> {cashInViewModel.resetMinigame()}
-            //MinigameType.CATTAP -> {catTapViewModel.resetMinigame()}
+            MinigameType.DROPINBUCKET -> {dropInBucketViewModel.resetMinigame()}
             //MinigameType.PENWASTE -> {penWasteViewModel.resetMinigame()}
             //MinigameType.CORRECTORDER -> {correctOrderViewModel.resetMinigame()}
             else -> {}

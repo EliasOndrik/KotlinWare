@@ -10,10 +10,6 @@ import com.example.kotlinware.ui.AppViewModelProvider
 import com.example.kotlinware.ui.minigames.GameOverScreen
 import com.example.kotlinware.ui.minigames.IntermissionScreen
 import com.example.kotlinware.ui.minigames.MinigameType
-import com.example.kotlinware.ui.minigames.tapping.BallonPopScreen
-import com.example.kotlinware.ui.minigames.tapping.CatTapScreen
-import com.example.kotlinware.ui.minigames.tapping.CorrectOrderScreen
-import com.example.kotlinware.ui.minigames.tapping.PenWasteScreen
 
 @Composable
 fun DraggingGamesScreen(
@@ -48,6 +44,14 @@ fun DraggingGamesScreen(
             CashInScreen(
                 onSuccess = {viewModel.onGameSuccess()},
                 viewModel.cashInViewModel
+            )
+        }
+        MinigameType.DROPINBUCKET -> {
+            DropInBucketScreen(
+                onSuccess = {viewModel.onGameSuccess()},
+                onFail = {viewModel.onGameFail()},
+                deltaTime = deltaTime,
+                viewModel.dropInBucketViewModel
             )
         }
 
