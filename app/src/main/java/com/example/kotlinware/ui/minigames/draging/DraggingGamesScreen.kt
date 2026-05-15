@@ -39,7 +39,6 @@ fun DraggingGamesScreen(
             }
 
         }
-
         MinigameType.CASHIN -> {
             CashInScreen(
                 onSuccess = {viewModel.onGameSuccess()},
@@ -54,7 +53,13 @@ fun DraggingGamesScreen(
                 viewModel.dropInBucketViewModel
             )
         }
-
+        MinigameType.LIGHTCANDLE -> {
+            LightCandleScreen(
+                onSuccess = {viewModel.onGameSuccess()},
+                deltaTime,
+                viewModel.lightCandleViewModel
+            )
+        }
 
         else -> {}
     }
