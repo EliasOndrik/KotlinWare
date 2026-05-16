@@ -65,6 +65,12 @@ fun SwipingGamesScreen(
             )
         }
 
+        MinigameType.PRISONESCAPE->{
+            PrisonEscapeScreen(
+                onSuccess = {viewModel.onGameSuccess()},
+                viewModel.prisonEscapeViewModel
+            )
+        }
         else -> {}
     }
 }
