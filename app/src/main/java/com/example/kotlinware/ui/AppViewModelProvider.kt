@@ -13,6 +13,7 @@ import com.example.kotlinware.ui.minigames.AbstractManagerViewModel
 import com.example.kotlinware.ui.minigames.draging.DraggingGamesViewModel
 import com.example.kotlinware.ui.minigames.rotating.RotatingGamesScreen
 import com.example.kotlinware.ui.minigames.rotating.RotatingGamesViewModel
+import com.example.kotlinware.ui.minigames.swiping.SwipingGamesViewModel
 import com.example.kotlinware.ui.minigames.tapping.TappingGamesViewModel
 import com.example.kotlinware.ui.navigation.NavigationViewModel
 import com.example.kotlinware.ui.shop.ShopViewModel
@@ -41,6 +42,9 @@ object AppViewModelProvider {
         }
         initializer {
             DraggingGamesViewModel(kotlinWareApplication().container.gameRepository)
+        }
+        initializer {
+            SwipingGamesViewModel(kotlinWareApplication().container.gameRepository)
         }
     }
 }
