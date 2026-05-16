@@ -52,22 +52,28 @@ abstract class AbstractManagerViewModel(
         }
     }
     fun resetTimer(time: Long){
-        _timerMillis.value = time
+        _timerMillis.update {time}
     }
     abstract fun pickRandomMinigame()
 
     fun onGameSuccess(){
+        if (currentMinigame.value == MinigameType.TRANSITION){
+            return
+        }
         success = true
         resetTimer(_timerMillis.value.coerceAtMost(1000L))
     }
     fun onGameFail(){
+        if (currentMinigame.value == MinigameType.TRANSITION){
+            return
+        }
         success = false
         resetTimer(_timerMillis.value.coerceAtMost(1000L))
     }
     fun onGameRetry(){
         initializeTimer(0L)
         _gameProgress.update { GameProgress() }
-        _currentMinigame.value = MinigameType.TRANSITION
+        _currentMinigame.update {MinigameType.TRANSITION}
         success = false
         saved = false
     }
@@ -78,7 +84,7 @@ abstract class AbstractManagerViewModel(
         } else {
             _gameProgress.update { it.copy(lives = it.lives - 1, score = it.score + 1) }
         }
-        _currentMinigame.value = MinigameType.TRANSITION
+        _currentMinigame.update { MinigameType.TRANSITION }
         success = false
     }
     private fun initializeTimer(time: Long){
@@ -123,4 +129,5 @@ enum class MinigameType(
     SUGARRUSH(5000L),
     LOVEMENOT(8000L),
     CAGEMATCH(5000L),
+    BALLIN(5000L),
 }
