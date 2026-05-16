@@ -130,4 +130,5 @@ enum class MinigameType(
     LOVEMENOT(8000L),
     CAGEMATCH(5000L),
     BALLIN(5000L),
+    PRISONESCAPE(6000L)
 }
