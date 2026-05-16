@@ -24,6 +24,7 @@ import com.example.kotlinware.ui.minigames.draging.DraggingGamesScreen
 import com.example.kotlinware.ui.minigames.draging.DraggingGamesViewModel
 import com.example.kotlinware.ui.minigames.rotating.RotatingGamesScreen
 import com.example.kotlinware.ui.minigames.rotating.RotatingGamesViewModel
+import com.example.kotlinware.ui.minigames.swiping.SwipingGamesScreen
 import com.example.kotlinware.ui.minigames.tapping.BallonPopScreen
 import com.example.kotlinware.ui.minigames.tapping.TappingGamesScreen
 import com.example.kotlinware.ui.shop.ShopScreen
@@ -94,9 +95,14 @@ fun KotlinWareNavHost(
                         RotatingGamesScreen(onQuit = {navHostController.navigate(MenuDestination.GAMES.name)})
                     }
                     composable(
-                        route = "tap"
+                        route = "dragging"
                     ){
                         DraggingGamesScreen(onQuit = {navHostController.navigate(MenuDestination.GAMES.name)})
+                    }
+                    composable(
+                        route = "tap"
+                    ){
+                        SwipingGamesScreen( onQuit = {navHostController.navigate(MenuDestination.GAMES.name)})
                     }
                 }
             }
