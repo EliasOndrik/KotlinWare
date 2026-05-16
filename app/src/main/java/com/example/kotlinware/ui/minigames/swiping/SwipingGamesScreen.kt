@@ -57,6 +57,13 @@ fun SwipingGamesScreen(
                 viewModel.cageMatchViewModel
             )
         }
+        MinigameType.BALLIN -> {
+            BallinScreen(
+                onSuccess = {viewModel.onGameSuccess()},
+                deltaTime,
+                viewModel.ballinViewModel
+            )
+        }
 
         else -> {}
     }
