@@ -122,4 +122,5 @@ enum class MinigameType(
     LIGHTCANDLE(6000L),
     SUGARRUSH(5000L),
     LOVEMENOT(8000L),
+    CAGEMATCH(5000L),
 }
