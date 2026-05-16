@@ -41,14 +41,20 @@ fun SwipingGamesScreen(
                     score = gameProgress.score
                 )
             }
-
         }
-
         MinigameType.LOVEMENOT->{
             LoveMeNotScreen(
                 onSuccess = {viewModel.onGameSuccess()},
                 deltaTime,
                 viewModel.loveMeNotViewModel
+            )
+        }
+        MinigameType.CAGEMATCH->{
+            CageMatchScreen(
+                onSuccess = {viewModel.onGameSuccess()},
+                onFail = {viewModel.onGameFail()},
+                deltaTime,
+                viewModel.cageMatchViewModel
             )
         }
 

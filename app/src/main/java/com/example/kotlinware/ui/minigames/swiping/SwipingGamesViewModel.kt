@@ -8,12 +8,13 @@ class SwipingGamesViewModel(gameRepository: GameInterfaceRepository) :
     AbstractManagerViewModel(gameRepository) {
     override val minigameName: String = "swiping"
     val loveMeNotViewModel = LoveMeNotViewModel()
+    val cageMatchViewModel = CageMatchViewModel()
 
     override fun pickRandomMinigame() {
-        val randomIndex = 0//Random.nextInt(4)
+        val randomIndex = 1//Random.nextInt(4)
         when(randomIndex){
             0 -> {switchMinigameType(MinigameType.LOVEMENOT )}
-            //1 -> {switchMinigameType(MinigameType.CATTAP)}
+            1 -> {switchMinigameType(MinigameType.CAGEMATCH)}
             //2 -> {switchMinigameType(MinigameType.PENWASTE)}
             //3 -> {switchMinigameType(MinigameType.CORRECTORDER)}
             else -> {}
@@ -23,7 +24,7 @@ class SwipingGamesViewModel(gameRepository: GameInterfaceRepository) :
     override fun resetMinigame() {
         when(currentMinigame.value){
             MinigameType.LOVEMENOT -> {loveMeNotViewModel.resetMinigame()}
-            //MinigameType.CATTAP -> {catTapViewModel.resetMinigame()}
+            MinigameType.CAGEMATCH -> {cageMatchViewModel.resetMinigame()}
             //MinigameType.PENWASTE -> {penWasteViewModel.resetMinigame()}
             //MinigameType.CORRECTORDER -> {correctOrderViewModel.resetMinigame()}
             else -> {}
