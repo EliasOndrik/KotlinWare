@@ -7,4 +7,29 @@
     <string name="rotating">Rotate phone</string>
     <string name="swiping">Swiping games</string>
     <string name="tapping">Tapping games</string>
+    <string name="pagerText">Score</string>
+    <string name="play">Play</string>
+    <string name="coins">Coins</string>
+
+    <string name="transition">Speed up</string>
+
+    <string name="ballonPop">Pop</string>
+    <string name="catTap">Whack the cat</string>
+    <string name="correctOrder">Red Green Blue</string>
+    <string name="penWaste">Waste</string>
+
+    <string name="ballin">Score</string>
+    <string name="cageMatch">Capture</string>
+    <string name="loveMeNot">Pull</string>
+    <string name="prisonEscape">Break out</string>
+
+    <string name="footballSkill">Kick</string>
+    <string name="platypusParry">Spin</string>
+    <string name="tuneFinder">Tune in</string>
+    <string name="waveGoodbye">Wave</string>
+
+    <string name="cashIn">Cash in</string>
+    <string name="dropInBucket">Catch</string>
+    <string name="lightCandle">Light</string>
+    <string name="sugarRush">Eat</string>
 </resources>
