@@ -7,6 +7,7 @@ import androidx.compose.runtime.withFrameMillis
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.kotlinware.ui.AppViewModelProvider
+import com.example.kotlinware.ui.minigames.Command
 import com.example.kotlinware.ui.minigames.GameOverScreen
 import com.example.kotlinware.ui.minigames.IntermissionScreen
 import com.example.kotlinware.ui.minigames.MinigameType
@@ -30,6 +31,7 @@ fun SwipingGamesScreen(
             }
         }
     }
+    Command(currentMinigame.commandId)
     when (currentMinigame){
         MinigameType.TRANSITION -> {
             if (gameProgress.lives> 0){
