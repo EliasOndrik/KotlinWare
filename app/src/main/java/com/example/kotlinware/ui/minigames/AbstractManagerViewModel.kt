@@ -2,6 +2,7 @@ package com.example.kotlinware.ui.minigames
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.kotlinware.R
 import com.example.kotlinware.data.GameInterfaceRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -112,23 +113,24 @@ data class GameProgress(
     val score: Int = 0,
 )
 enum class MinigameType(
-    val time: Long
+    val time: Long,
+    val commandId: Int
 ){
-    TRANSITION(2000L),
-    BALLONPOP(5000L),
-    CATTAP(5000L),
-    PENWASTE(5000L),
-    CORRECTORDER(5000L),
-    WAVEGOODBYE(5000L),
-    FOOTBALLSKILL(5000L),
-    TUNEFINDER(5000L),
-    PLATYPUSPARRY(5000L),
-    CASHIN(6000L),
-    DROPINBUCKET(5000L),
-    LIGHTCANDLE(6000L),
-    SUGARRUSH(5000L),
-    LOVEMENOT(8000L),
-    CAGEMATCH(5000L),
-    BALLIN(5000L),
-    PRISONESCAPE(6000L)
+    TRANSITION(2000L,R.string.transition),
+    BALLONPOP(5000L,R.string.ballonPop),
+    CATTAP(5000L, R.string.catTap),
+    PENWASTE(5000L, R.string.penWaste),
+    CORRECTORDER(5000L, R.string.correctOrder),
+    WAVEGOODBYE(5000L, R.string.waveGoodbye),
+    FOOTBALLSKILL(5000L, R.string.footballSkill),
+    TUNEFINDER(5000L, R.string.tuneFinder),
+    PLATYPUSPARRY(5000L, R.string.platypusParry),
+    CASHIN(6000L, R.string.cashIn),
+    DROPINBUCKET(5000L, R.string.dropInBucket),
+    LIGHTCANDLE(6000L, R.string.lightCandle),
+    SUGARRUSH(5000L, R.string.sugarRush),
+    LOVEMENOT(8000L, R.string.loveMeNot),
+    CAGEMATCH(5000L, R.string.cageMatch),
+    BALLIN(5000L, R.string.ballin),
+    PRISONESCAPE(6000L, R.string.prisonEscape)
 }
