@@ -49,7 +49,7 @@ fun TopMenuBar (
                     .padding(horizontal = 10.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Text( text = "Coins: ")
+                Text( text = "${stringResource(R.string.coins)}: ")
                 Spacer(modifier = Modifier.weight(0.9f))
                 Text(text = coins.toString())
             }
@@ -69,39 +69,37 @@ fun BottomMenuBar (
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceEvenly
     ) {
-        Button(
-            onClick = onTitleButtonClick,
-            shape = RectangleShape,
-            modifier = Modifier.fillMaxHeight(0.9f).size(100.dp),
-            border = BorderStroke(2.dp, MaterialTheme.colorScheme.tertiary)
-        ) {
-            Text(stringResource(R.string.title))
-        }
-        Button(
-            onClick = onGamesButtonClick,
-            shape = RectangleShape,
-            modifier = Modifier.fillMaxHeight(0.9f).size(100.dp),
-            border = BorderStroke(2.dp, MaterialTheme.colorScheme.tertiary)
-            ) {
-            Text(stringResource(R.string.games))
-        }
-        Button(
-            onClick = onShopButtonClick,
-            shape = RectangleShape,
-            modifier = Modifier.fillMaxHeight(0.9f).size(100.dp),
-            border = BorderStroke(2.dp, MaterialTheme.colorScheme.tertiary)
-            ) {
-            Text(stringResource(R.string.shop))
-        }
+        MenuButton(
+            onTitleButtonClick,
+            R.string.title
+        )
+        MenuButton(
+            onGamesButtonClick,
+            R.string.games
+        )
+        MenuButton(
+            onShopButtonClick,
+            R.string.shop
+        )
     }
 }
 
-enum class MenuDestination(
-    val id:Int
-){
-    TITLE(R.string.title),
-    GAMES(R.string.games),
-    SHOP(R.string.shop)
+@Composable
+fun MenuButton(onClick:()->Unit, stringId: Int){
+    Button(
+        onClick = onClick,
+        shape = RectangleShape,
+        modifier = Modifier.fillMaxHeight(0.9f).size(100.dp),
+        border = BorderStroke(2.dp, MaterialTheme.colorScheme.tertiary)
+    ) {
+        Text(stringResource(stringId))
+    }
+}
+
+enum class MenuDestination{
+    TITLE,
+    GAMES,
+    SHOP,
 }
 
 @Preview
