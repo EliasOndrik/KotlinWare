@@ -20,11 +20,7 @@ import com.example.kotlinware.R
 
 @Composable
 fun TitleScreen(){
-    // Získame informáciu o aktuálnej konfigurácii zariadenia
-    val configuration = LocalConfiguration.current
 
-    // Zistíme, či je mobil otočený horizontálne (Landscape)
-    val isLandscape = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
