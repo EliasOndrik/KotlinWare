@@ -114,10 +114,16 @@ class RotatingGamesViewModel(
     }
 
     fun onGameSuccess(){
+        if (currentMinigame.value == MinigameType.TRANSITION){
+            return
+        }
         success = true
         resetTimer(_timerMillis.value.coerceAtMost(1000L))
     }
     fun onGameFail(){
+        if (currentMinigame.value == MinigameType.TRANSITION){
+            return
+        }
         success = false
         resetTimer(_timerMillis.value.coerceAtMost(1000L))
     }
