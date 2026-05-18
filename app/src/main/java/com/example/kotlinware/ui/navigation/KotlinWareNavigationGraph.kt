@@ -1,16 +1,20 @@
 package com.example.kotlinware.ui.navigation
 
+import android.content.res.Configuration
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navigation
@@ -41,13 +45,31 @@ fun KotlinWareNavHost(
     navHostController: NavHostController = rememberNavController()
 ){
     val playerState by viewModel.playerState.collectAsStateWithLifecycle()
+    val navBackStackEntry by navHostController.currentBackStackEntryAsState()
+    val currentDestination = navBackStackEntry?.destination
+
+
+    val configuration = LocalConfiguration.current
+    val isLandscape = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
+
     Scaffold(
-        topBar = { TopMenuBar(coins = playerState.money) },
-        bottomBar = { BottomMenuBar(
-            {navHostController.navigate(MenuDestination.TITLE.name)},
-            {navHostController.navigate(MenuDestination.GAMES.name)},
-            {navHostController.navigate(MenuDestination.SHOP.name)}
-        ) }
+        topBar = {
+            if (currentDestination?.hierarchy?.any { it.route == AppDestination.MENU.name } == true){
+                TopMenuBar(
+                    coins = playerState.money
+                )
+            }
+                 },
+        bottomBar = {
+            if (currentDestination?.hierarchy?.any { it.route == AppDestination.MENU.name } == true){
+                BottomMenuBar(
+                    {navHostController.navigate(MenuDestination.TITLE.name)},
+                    {navHostController.navigate(MenuDestination.GAMES.name)},
+                    {navHostController.navigate(MenuDestination.SHOP.name)}
+                )
+            }
+
+        }
     ) { innerPadding ->
         Box(
             modifier = Modifier.padding(innerPadding)
@@ -70,7 +92,7 @@ fun KotlinWareNavHost(
                     ){
                         GameSelectionScreen(onPlayClick = {
                             name->
-                            navHostController.navigate("tap")
+                            navHostController.navigate(name)
 
                         })
                     }
@@ -81,7 +103,7 @@ fun KotlinWareNavHost(
                     }
                 }
                 navigation(
-                    startDestination = "tap",
+                    startDestination = "tapping",
                     route = AppDestination.GAME.name
                 ){
                     composable(
@@ -100,7 +122,7 @@ fun KotlinWareNavHost(
                         DraggingGamesScreen(onQuit = {navHostController.navigate(MenuDestination.GAMES.name)})
                     }
                     composable(
-                        route = "tap"
+                        route = "swiping"
                     ){
                         SwipingGamesScreen( onQuit = {navHostController.navigate(MenuDestination.GAMES.name)})
                     }
