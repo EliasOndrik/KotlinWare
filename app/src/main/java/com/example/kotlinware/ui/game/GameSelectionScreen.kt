@@ -119,7 +119,7 @@ fun GamePager(
             onClick = {onPlayClick(minigames[pagerState.currentPage].name)},
             shape = RectangleShape
         ) {
-            Text("Play")
+            Text(stringResource(R.string.play))
         }
     }
 
@@ -175,7 +175,7 @@ fun GamePage(
             Box(
                 modifier = Modifier.padding(10.dp)
             ){
-                Text("Score: $score",)
+                Text("${stringResource(R.string.pagerText)}: $score",)
             }
         }
 
