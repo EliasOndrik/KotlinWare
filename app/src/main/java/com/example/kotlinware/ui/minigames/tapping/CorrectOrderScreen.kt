@@ -53,16 +53,6 @@ fun CorrectOrderScreen(
             }
         }
     }
-    Surface(
-        color = MaterialTheme.colorScheme.background
-    ) {
-        Box(
-            modifier = Modifier.fillMaxWidth(),
-            contentAlignment = Alignment.Center
-        ){
-            Text("Red Green Blue", fontSize = 40.sp)
-        }
-    }
 }
 
 @Preview

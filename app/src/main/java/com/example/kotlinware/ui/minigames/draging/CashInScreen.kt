@@ -62,16 +62,6 @@ fun CashInScreen(
             }
         }
     }
-    Surface(
-        color = MaterialTheme.colorScheme.background
-    ) {
-        Box(
-            modifier = Modifier.fillMaxWidth(),
-            contentAlignment = Alignment.Center
-        ){
-            Text("Cash in", fontSize = 40.sp)
-        }
-    }
 }
 
 @Preview

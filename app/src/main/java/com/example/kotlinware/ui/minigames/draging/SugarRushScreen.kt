@@ -83,16 +83,6 @@ fun SugarRushScreen(
             }
         }
     }
-    Surface(
-        color = MaterialTheme.colorScheme.background
-    ) {
-        Box(
-            modifier = Modifier.fillMaxWidth(),
-            contentAlignment = Alignment.Center
-        ){
-            Text("Eat", fontSize = 40.sp)
-        }
-    }
 }
 
 

@@ -63,16 +63,6 @@ fun TuneFinderScreen(
             center = Offset(screenWidth/2-200f,screenHeight/2)
         )
     }
-    Surface(
-        color = MaterialTheme.colorScheme.background
-    ) {
-        Box(
-            modifier = Modifier.fillMaxWidth(),
-            contentAlignment = Alignment.Center
-        ){
-            Text("Tune in", fontSize = 40.sp)
-        }
-    }
 }
 
 @Preview

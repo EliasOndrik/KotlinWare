@@ -67,16 +67,6 @@ fun PlatypusParryScreen(
 
         }
     }
-    Surface(
-        color = MaterialTheme.colorScheme.background
-    ) {
-        Box(
-            modifier = Modifier.fillMaxWidth(),
-            contentAlignment = Alignment.Center
-        ){
-            Text("Spin", fontSize = 40.sp)
-        }
-    }
 }
 
 @Preview

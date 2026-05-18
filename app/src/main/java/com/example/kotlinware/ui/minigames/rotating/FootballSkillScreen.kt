@@ -74,16 +74,6 @@ fun FootballSkillScreen(
             center = Offset(screenWidth/2f+ ballOffset.x, screenHeight/2f + ballOffset.y)
         )
     }
-    Surface(
-        color = MaterialTheme.colorScheme.background
-    ) {
-        Box(
-            modifier = Modifier.fillMaxWidth(),
-            contentAlignment = Alignment.Center
-        ){
-            Text("Kick", fontSize = 40.sp)
-        }
-    }
 }
 
 @Preview

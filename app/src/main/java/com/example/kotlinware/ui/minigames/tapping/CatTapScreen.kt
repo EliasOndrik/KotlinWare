@@ -53,16 +53,6 @@ fun CatTapScreen(
             )
         }
     }
-    Surface(
-        color = MaterialTheme.colorScheme.background
-    ) {
-        Box(
-            modifier = Modifier.fillMaxWidth(),
-            contentAlignment = Alignment.Center
-        ){
-            Text("Whack the cat", fontSize = 40.sp)
-        }
-    }
 }
 @Preview
 @Composable

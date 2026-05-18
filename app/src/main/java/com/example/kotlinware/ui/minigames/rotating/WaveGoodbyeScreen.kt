@@ -54,16 +54,6 @@ fun WaveGoodbyeScreen(
         }
 
     }
-    Surface(
-        color = MaterialTheme.colorScheme.background
-    ) {
-        Box(
-            modifier = Modifier.fillMaxWidth(),
-            contentAlignment = Alignment.Center
-        ){
-            Text("Wave", fontSize = 40.sp)
-        }
-    }
 }
 
 @Preview

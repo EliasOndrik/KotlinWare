@@ -28,17 +28,6 @@ fun BallonPopScreen(
     viewModel: BallonPopViewModel
 ){
     val ballons by viewModel.ballons.collectAsState()
-    Surface(
-        color = MaterialTheme.colorScheme.background
-    ) {
-        Box(
-            modifier = Modifier.fillMaxWidth(),
-            contentAlignment = Alignment.Center
-        ){
-            Text("Pop", fontSize = 40.sp)
-        }
-    }
-
     Canvas(
         modifier = Modifier.fillMaxSize().pointerInput(Unit){
             detectTapGestures { offset ->

@@ -28,16 +28,7 @@ fun LoveMeNotScreen(
     viewModel: LoveMeNotViewModel
 ){
     val leafs by viewModel.leafs.collectAsStateWithLifecycle()
-    Surface(
-        color = MaterialTheme.colorScheme.background
-    ) {
-        Box(
-            modifier = Modifier.fillMaxWidth(),
-            contentAlignment = Alignment.Center
-        ){
-            Text("Pull", fontSize = 40.sp)
-        }
-    }
+
     Canvas(
         modifier = Modifier.fillMaxSize().pointerInput(Unit){
             detectDragGestures(
@@ -57,6 +48,7 @@ fun LoveMeNotScreen(
         if (viewModel.success()){
             onSuccess()
         }
+
         val screenWidth = size.width
         val screenHeight = size.height
 

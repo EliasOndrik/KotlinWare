@@ -32,16 +32,7 @@ fun CageMatchScreen(
     val ropeEnd by viewModel.ropeEnd.collectAsStateWithLifecycle()
     val animalOffset by viewModel.animalOffset.collectAsStateWithLifecycle()
     val cageOffset by viewModel.cageOffset.collectAsStateWithLifecycle()
-    Surface(
-        color = MaterialTheme.colorScheme.background
-    ) {
-        Box(
-            modifier = Modifier.fillMaxWidth(),
-            contentAlignment = Alignment.Center
-        ){
-            Text("Capture", fontSize = 40.sp)
-        }
-    }
+
     Canvas(
         modifier = Modifier.fillMaxSize().pointerInput(Unit){
             detectDragGestures(

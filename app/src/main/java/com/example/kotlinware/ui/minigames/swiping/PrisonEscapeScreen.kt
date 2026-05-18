@@ -26,16 +26,7 @@ fun PrisonEscapeScreen(
     viewModel: PrisonEscapeViewModel
 ){
     val breakPoints by viewModel.breakPoints.collectAsStateWithLifecycle()
-    Surface(
-        color = MaterialTheme.colorScheme.background
-    ) {
-        Box(
-            modifier = Modifier.fillMaxWidth(),
-            contentAlignment = Alignment.Center
-        ){
-            Text("Break out", fontSize = 40.sp)
-        }
-    }
+
     Canvas(
         modifier = Modifier.fillMaxSize().pointerInput(Unit){
             detectDragGestures(

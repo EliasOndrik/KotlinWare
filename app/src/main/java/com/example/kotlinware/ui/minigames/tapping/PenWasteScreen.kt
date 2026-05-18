@@ -55,16 +55,6 @@ fun PenWasteScreen(
             center = Offset(screenWidth/2 + viewModel.buttonOffset.x,screenHeight/2 + viewModel.buttonOffset.y)
         )
     }
-    Surface(
-        color = MaterialTheme.colorScheme.background
-    ) {
-        Box(
-            modifier = Modifier.fillMaxWidth(),
-            contentAlignment = Alignment.Center
-        ){
-            Text("Waste", fontSize = 40.sp)
-        }
-    }
 }
 
 @Preview
